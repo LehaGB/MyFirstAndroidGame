@@ -4,20 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneManger : MonoBehaviour
 {
-    public LoadSceneManger Instance { get; private set; }
+    public static LoadSceneManger Instance;
     public string sceneToLoad;
 
 
-    private void Awake()
+    private void Start()
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null)
         {
-            Destroy(this.gameObject);
+            Instance = this;
         }
         else
         {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

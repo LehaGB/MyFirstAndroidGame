@@ -3,21 +3,20 @@ using UnityEngine;
 
 public class FadeManager : MonoBehaviour
 {
-    public static FadeManager Instance { get; private set; }
+    public static FadeManager Instance;
 
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 0.5f;
 
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if(Instance == null)
         {
-            Destroy(this.gameObject);
+            Instance = this;
         }
         else
         {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -35,9 +34,10 @@ public class FadeManager : MonoBehaviour
         {
             t += Time.deltaTime;
             fadeCanvasGroup.alpha = 1 - (t / fadeDuration);
+            yield return null;
         }
         fadeCanvasGroup.alpha = 0;
-        yield return null;
+        
     }
     public IEnumerator FadeOut()
     {
@@ -48,8 +48,9 @@ public class FadeManager : MonoBehaviour
         {
             t += Time.deltaTime;
             fadeCanvasGroup.alpha = t / fadeDuration;
+            yield return null;
         }
         fadeCanvasGroup.alpha = 1;
-        yield return null;
+        
     }
 }
