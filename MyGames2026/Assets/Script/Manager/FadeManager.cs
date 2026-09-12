@@ -1,9 +1,11 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using UnityEngine;
 
 public class FadeManager : MonoBehaviour
 {
     public static FadeManager Instance;
+
 
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 0.5f;
